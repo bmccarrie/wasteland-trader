@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wasteland Trader</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src= 
+"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"> 
+    </script> 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-slider@11.0.2/dist/bootstrap-slider.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-slider@11.0.2/dist/css/bootstrap-slider.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+      <div class="overlay" id="overlay"></div>
+      <div class="overlay" id="action-overlay"></div>
+
+      <!-- Bad things happen panel-->
+      <div class="action-panel" id="bad-things">
+        
+          <div class="layout" style="display: flex;">
+            <div style="flex:1;"><img src="images/bad-things.png" alt="Bad things" class="bad-icon" id="bad-img"></div>
+            <div style="flex:2;">
+              <div class="action-text" style="flex: 1;" id="bad-msg">Bad things message!</div>
+              <div class="action-text bold" id="bad-msg2"></div>
+            </div>
+              <div class="flex xs2 offset-xs6 mb-2">
+                <button type="button" class="x-close-btn" id="close-bad">X</button>
+              </div>
+          </div>
+          <div class="layout action-btns" id="bad-action-btns">
+            <button type="button" class="btn btn-rad run" id="runbtn">Run</button>
+            <button type="button" class="btn btn-rad fight" id="fightbtn">Fight</button>
+          </div>
+         
+      </div>
+      <!-- End of Bad things panel-->
+
+      <!-- Good things happen panel-->
+      <div class="action-panel" id="good-things">
+        <div>
+          <div class="layout" style="display: flex;">
+            <div style="flex:1;"><img src="images/good-things.png" alt="Good things" class="good-icon"></div>
+            <div style="flex:2;">
+              <div class="action-text" style="flex: 1;" id="good-msg">Good things message!</div>
+              <div class="action-text bold" id="good-msg2"></div>
+            </div>
+            <div class="flex xs2 offset-xs6 mb-2">
+              <button type="button" class="x-close-btn" id="close-good">X</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End of Good things panel-->
+
+      <!-- Market fluctuation panel-->
+      <div class="action-panel" id="market-fluctuation">
+        <div>
+          <div class="layout" style="display: flex;">
+            <img src="images/price-changes.png" alt="Market fluctuation" class="market-icon">
+            <div class="action-text" style="flex: 1;" id="market-msg">Market fluctuation message!</div>
+              <div class="flex xs2 offset-xs6 mb-2">
+                <button type="button" class="x-close-btn" id="close-market">X</button>
+              </div>
+          </div>
+        </div>
+      </div>
+      <!-- End of Market fluctuation panel-->
+
+      <!-- Cure Health panel-->
+      <div class="action-panel" id="cure-health">
+        <div>
+          <div class="layout" style="display: flex;">
+            <img src="images/injured-boy.png" alt="Cure Health" class="market-icon">
+            <div style="flex: 1;">
+              <div class="action-text" id="cure-health-msg">Cure your helath for 250 caps!</div>
+              <button type="button" class="btn btn-rad cure" id="curemebtn">Cure Me</button>
+            </div>
+            
+              <div class="flex xs2 offset-xs6 mb-2">
+                <button type="button" class="x-close-btn" id="close-health">X</button>
+              </div>
+              
+          </div>
+          
+          <div class="layout">
+            
+          </div>
+        </div>
+      </div>
+      <!-- End of Cure Health panel-->
+
+      <!-- You're Dead pannel-->
+      <div class="action-panel dead" id="dead">
+        <div>
+          <div class="layout" style="display: flex; flex-direction: column;">
+            <img src="images/wasteland-trader-logo-new2.png" alt="Wasteland Trader" class="logo">
+            <p>Your health drops to ZERO!</p>
+            <img src="images/dead.png" alt="You are dead" class="dead-icon" style="width: 200px; margin:auto;">
+            <p>GAME OVER</p>
+            <button type="button" class="btn btn-rad" id="play-again-btn">Play Again</button>
+          </div>
+        </div>
+      </div>
+      <!-- End of You're Dead pannel-->
+
+      <!-- Game Over pannel-->
+      <div class="action-panel dead" id="game-over">
+        <div>
+          <div class="layout" style="display: flex; flex-direction: column;">
+            <img src="images/wasteland-trader-logo-new2.png" alt="Wasteland Trader" class="logo">
+            <p>GAME OVER</p>
+            <p>Congratulations! You survived 30 days in the Wasteland.</p>
+            <img src="images/good-things.png" alt="You are dead" class="dead-icon" style="width: 200px; margin:auto; margin-bottom:30px;">
+            <p>You finished the game with:</p>
+            <p><span id="total-caps">000</span> Caps<br><span id="total-debt">000</span> Debt<br><span id="total">000</span> Total</p>
+            <button type="button" class="btn btn-rad" id="new-game-btn">Play Again</button>
+          </div>
+        </div>
+      </div>
+      <!-- End of Game Over pannel-->
+
+      <!-- Intro pannel-->
+       <div class="action-panel intro" id="intro">
+        <div>
+          <div class="layout" style="display: flex; flex-direction: column;">
+            <img src="images/wasteland-trader-logo-new2.png" alt="Wasteland Trader" class="logo">
+            <h3>Welcome to<br>Wasteland Trader!</h3>
+            <p>You have only 30 days to make your fortune in the Wasteland. You start with only 200 caps and it's up to you to navigate the trade routes and survive!</p>
+            <p>Select items to buy and click "Next Day" to travel to your next trading post destination. Along the way be on the look out for fluctuating market prices, Raider Gangs, local wildlife and a radioactive environment.</p>
+            <img src="images/good-things.png" alt="Good Luck!" class="dead-icon" style="width: 200px; margin:auto; margin-bottom:30px;">
+            
+            <button type="button" class="btn btn-rad" id="start-game-btn">Start Game</button>
+          </div>
+        </div>
+      </div> 
+      <!-- End of Intro pannel-->
+
+      <!-- Pay Debt Pannel-->
+      <div class="action-panel" id="debt-pannel">
+        <div>
+          <div class="layout" style="display: flex;">
+            <div class="action-text" style="flex: 1;" id="debt-msg">Pay your debt!</div>
+              <div class="flex xs2 offset-xs6 mb-2">
+                <button type="button" class="x-close-btn" id="close-debt">X</button>
+              </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- End of Pay Debt Pannel-->
+
+      <!-- Caps Stash Panel  -->
+      <div class="action-panel" id="cap-stash-panel">
+        <div>
+          <div class="layout" style="display: flex;">
+            <div class="action-text" style="flex: 1;" id="cap-stash-msg"><h4>Your Cap Stash: <span id="current-stash">0</span></h4></div>
+              <div class="flex">
+                <button type="button" class="x-close-btn" id="close-cap-stash">X</button>
+              </div>
+          </div>
+          <div class="cap-stash-btns">
+            <button type="button" class="btn btn-rad" id="withdrawlbtn">Withdrawl</button>
+            <button type="button" class="btn btn-rad" id="depositebtn">Deposite</button>
+          </div>
+        </div>
+      </div>
+      <!-- End of Caps Stash Panel-->
+
+      <!-- Deposite Panel -->
+      <div class="action-panel" id="deposite-panel">
+        <div>
+          <div class="layout" style="display: flex;">
+            <div class="action-text" style="flex: 1;" id="deposite-msg"><h4>Deposite your caps!</h4></div>
+              <div class="flex">
+                <button type="button" class="x-close-btn" id="close-deposite">X</button>
+              </div>
+              
+          </div>
+          <div class="cap-stash-btns">
+            <input id="depositeSlide" type="text" data-slider-min="0" data-slider-max="500" data-slider-step="1" data-slider-value="0" data-slider-tooltip="hide"/>
+            <span id="depositeLabel">Caps: <span id="depositeVal">0</span></span>
+          </div>
+          <div class="cap-stash-btns">
+            <button type="button" class="btn btn-rad" id="confirmdepositebtn"><i class="fa-solid fa-circle-check"></i> Deposite</button>
+          </div>
+        </div>
+      </div>
+      <script>
+        var slider = new Slider("#depositeSlide");
+        slider.on("slide", function(sliderValue) {
+          document.getElementById("depositeVal").textContent = sliderValue;
+        });
+        </script>
+      <!-- End of Deposite Panel-->
+
+      <!-- Withdrawl Panel -->
+      <div class="action-panel" id="withdrawl-panel">
+        <div>
+          <div class="layout" style="display: flex;">
+            <div class="action-text" style="flex: 1;" id="withdrawl-msg"><h4>Withdrawl your caps!</h4></div>
+              <div class="flex">
+                <button type="button" class="x-close-btn" id="close-withdrawl">X</button>
+              </div>
+          </div>
+          <div class="cap-stash-btns">
+            <input id="withdrawlSlide" type="text" data-slider-min="0" data-slider-max="500" data-slider-step="1" data-slider-value="0" data-slider-tooltip="hide"/>
+            <span id="withdrawlLabel">Caps: <span id="withdrawlVal">0</span></span>
+          </div>
+          <div class="cap-stash-btns">
+            <button type="button" class="btn btn-rad" id="confirmwithdrawlbtn"><i class="fa-solid fa-circle-check"></i> Withdrawl</button>
+          </div>
+        </div>
+      </div>
+      <script>
+        var slider = new Slider("#withdrawlSlide");
+        slider.on("slide", function(sliderValue) {
+          document.getElementById("withdrawlVal").textContent = sliderValue;
+        });
+        </script>
+      <!-- End of Withdrawl Panel-->
+
+      
+
+      <div class="locations" id="locations">
+        <p>Select a location:</p>
+        <button type="button" class="btn btn-loc active" id="location1" style="border-bottom:none;">Diamond City</button>
+        <button type="button" class="btn btn-loc" id="location2" style="border-bottom:none;">Goodneighbor</button>
+        <button type="button" class="btn btn-loc" id="location3" style="border-bottom:none;">The Castle</button>
+        <button type="button" class="btn btn-loc" id="location4" style="border-bottom:none;">Sanctuary Hills</button>
+        <button type="button" class="btn btn-loc" id="location5">Red Rocket</button>
+      </div>
+      <div class="top-section">
+        <img src="images/wasteland-trader-logo-new2.png" alt="Wasteland Trader" class="logo">
+        
+        <div class="layout2">
+          <h2>Day: <span id="day">01</span>/30</h2>
+          <h2 id="currentlocation">Diamond City</h2>
+        </div>
+        <div class="layout3">
+          <div>Debt<br><span id="debt">500</span></div>
+          <div><img src="images/caps-icon.png"><h3 id="caps">200</h3></div>
+          <div>Inventory<br><span id="int">0</span>/100</div>
+        </div>
+        <div class="layout3">
+          <div><button type="button" class="btn pay-debt" id="paydebtbtn">Pay Debt</button></div>
+          <div><button type="button" class="btn next-day" id="daybtn">Next Day</button></div>
+          <div><button type="button" class="btn cure-health" id="curebtn">Cure Health</button></div>
+        </div>
+      </div>
+        
+        <div class="trading-area">
+          <!-- dummy data-->
+
+          <div class="accordion accordion-flush" id="accordionFlushExample">
+            <!-- Item 1 Perfectly Preserved Pie -->
+            <div class="accordion-item trade-panel" id="item1">
+              <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                  <div class="trade-panel-head" style="display:flex; flex-direction:column;">
+                    <div class="prod-price">
+                      <div style="flex:1;"><h3 id="item-name1">Perfectly Preserved Pie</h3></div> <div><img src="images/caps-icon.png" class="blk-cap"> <h3 style="padding-right:8px;" id="item1value"> 5500</h3></div>
+                    </div>
+                    <div class="in-av">
+                      <div style="flex:1;">Inventory: <span id="int1">0</span></div> <div style="padding-right:8px;">Amt Pd: <span id="amt-paid1">0</span></div>
+                    </div>
+                  </div>
+                </button>
+              </h2>
+              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                  <button type="button" class="btn buy" id="buybtn1">Buy</button>
+                  <button type="button" class="btn sell" id="sellbtn1">Sell</button>
+                </div>
+              </div>
+
+              <div class="transaction-panel" id="buy-panel1">
+                <div class="v-overlay__content">
+                  <div class="layout" style="display: flex;">
+                    <div class="tran-product" style="flex: 1;">Prefectly Preserved Pie - <span id="cur-price1">5,500</span> caps<p>Max available: <span id="maxavail1"></span></p></div>
+                      <div class="flex xs2 offset-xs6 mb-2">
+                        <button type="button" class="x-close-btn" id="close-x1">X</button>
+                      </div>
+                  </div>
+                  <div class="plus-minus">
+                    <button type="button" class="btn btn-light" id="minusb1">-</button>
+                    <div class="tran-amount" style="text-align: center;" id="amountb1">0</div>
+                    <button type="button" class="btn btn-dark" id="plusb1">+</button>
+                  </div>
+                  <div class="half-sell-max">
+                    <div>
+                    <button type="button" id="halfb1" class="btn btn-success btn-rad"><span>Half</span></button>
+                    </div>
+                    <div>
+                      <button type="button" id="buy1" class="btn btn-success btn-rad"><span>Buy</span></button>
+                    </div>
+                    <div>
+                      <button type="button"id="maxb1" class="btn btn-success btn-rad"><span>Max</span></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="transaction-panel" id="sell-panel1">
+                <div class="v-overlay__content">
+                  <div class="layout" style="display: flex;">
+                    <div class="tran-product" style="flex: 1;">Prefectly Preserved Pie - <span id="sell-price1">5500</span> caps<p>Current Inventory: <span id="sellint1">0</span></p></div>
+                      <div class="flex xs2 offset-xs6 mb-2">
+                        <button type="button" class="x-close-btn" id="close-xs1">X</button>
+                      </div>
+                  </div>
+                  <div class="plus-minus">
+                    <button type="button" class="btn btn-light" id="minus1">-</button>
+                    <div class="tran-amount" style="text-align: center;" id="amount1">0</div>
+                    <button type="button" class="btn btn-dark" id="plus1">+</button>
+                  </div>
+
+                  <div class="half-sell-max">
+                    <div>
+                    <button type="button" id="halfs1" class="btn btn-success btn-rad"><span>Half</span></button>
+                    </div>
+                    <div>
+                      <button type="button" id="sell1" class="btn btn-success btn-rad" onclick="sellClickHandler(1)"><span>Sell</span></button>
+                    </div>
+                    <div>
+                      <button type="button" id="maxs1" class="btn btn-success btn-rad"><span >Max</span></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!-- end of item1 -->
+
+            <!-- Item 2 Nuka Cola Quantum -->
+            <div class="accordion-item trade-panel" id="item2">
+              <h2 class="accordion-header" id="flush-headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                  <div class="trade-panel-head" style="display:flex; flex-direction:column;">
+                    <div class="prod-price">
+                      <div style="flex:1;"><h3 id="item-name2">Nuka Cola Quantum</h3></div> <div><img src="images/caps-icon.png" class="blk-cap"> <h3 style="padding-right:8px;" id="item2value">1000</h3></div>
+                    </div>
+                    <div class="in-av">
+                      <div style="flex:1;">Inventory: <span id="int2">0</span></div> <div style="padding-right:8px;">Amt Pd: <span id="amt-paid2">0</span></div>
+                    </div>
+                  </div>
+                </button>
+              </h2>
+              <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                  <button type="button" class="btn buy" id="buybtn2">Buy</button>
+                  <button type="button" class="btn sell" id="sellbtn2">Sell</button>
+                </div>
+              </div>
+
+              <div class="transaction-panel" id="buy-panel2">
+                <div class="v-overlay__content">
+                  <div class="layout" style="display: flex;">
+                    <div class="tran-product" style="flex: 1;">Nuka Cola Quantum - <span id="cur-price2">1,000</span> caps<p>Max available: <span id="maxavail2"></span></p></div>
+                      <div class="flex xs2 offset-xs6 mb-2">
+                        <button type="button" class="x-close-btn" id="close-x2">X</button>
+                      </div>
+                  </div>
+                  <div class="plus-minus">
+                    <button type="button" class="btn btn-light" id="minusb2">-</button>
+                    <div class="tran-amount" style="text-align: center;" id="amountb2">0</div>
+                    <button type="button" class="btn btn-dark" id="plusb2">+</button>
+                  </div>
+                  <div class="half-sell-max">
+                    <div>
+                    <button type="button" id="halfb2" class="btn btn-success btn-rad"><span>Half</span></button>
+                    </div>
+                    <div>
+                      <button type="button" id="buy2" class="btn btn-success btn-rad"><span>Buy</span></button>
+                    </div>
+                    <div>
+                      <button type="button"id="maxb2" class="btn btn-success btn-rad"><span>Max</span></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="transaction-panel" id="sell-panel2">
+                <div class="v-overlay__content">
+                  <div class="layout" style="display: flex;">
+                    <div class="tran-product" style="flex: 1;">Nuka Cola Quantum - <span id="sell-price2">1000</span> caps<p>Current Inventory: <span id="sellint2">0</span></p></div>
+                      <div class="flex xs2 offset-xs6 mb-2">
+                        <button type="button" class="x-close-btn" id="close-xs2">X</button>
+                      </div>
+                  </div>
+                  <div class="plus-minus">
+                    <button type="button" class="btn btn-light" id="minus2">-</button>
+                    <div class="tran-amount" style="text-align: center;" id="amount2">0</div>
+                    <button type="button" class="btn btn-dark" id="plus2">+</button>
+                  </div>
+
+                  <div class="half-sell-max">
+                    <div>
+                    <button type="button" id="halfs2" class="btn btn-success btn-rad"><span>Half</span></button>
+                    </div>
+                    <div>
+                      <button type="button" id="sell2" class="btn btn-success btn-rad" onclick="sellClickHandler(2)"><span>Sell</span></button>
+                    </div>
+                    <div>
+                      <button type="button" id="maxs2" class="btn btn-success btn-rad"><span >Max</span></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!-- end of item2 -->
+
+            <!-- Item 3 Gwinnett Stout  -->
+            <div class="accordion-item trade-panel" id="item3">
+              <h2 class="accordion-header" id="flush-headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                  <div class="trade-panel-head" style="display:flex; flex-direction:column;">
+                    <div class="prod-price">
+                      <div style="flex:1;"><h3 id="item-name3">Gwinnett Stout</h3></div> <div><img src="images/caps-icon.png" class="blk-cap"> <h3 style="padding-right:8px;" id="item3value">750</h3></div>
+                    </div>
+                    <div class="in-av">
+                      <div style="flex:1;">Inventory: <span id="int3">0</span></div> <div style="padding-right:8px;">Amt Pd: <span id="amt-paid3">0</span></div>
+                    </div>
+                  </div>
+                </button>
+              </h2>
+              <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                  <button type="button" class="btn buy" id="buybtn3">Buy</button>
+                  <button type="button" class="btn sell" id="sellbtn3">Sell</button>
+                </div>
+              </div>
+
+              <div class="transaction-panel" id="buy-panel3">
+                <div class="v-overlay__content">
+                  <div class="layout" style="display: flex;">
+                    <div class="tran-product" style="flex: 1;">Gwinnett Stout - <span id="cur-price3">750</span> caps<p>Max available: <span id="maxavail3"></span></p></div>
+                      <div class="flex xs2 offset-xs6 mb-2">
+                        <button type="button" class="x-close-btn" id="close-x3">X</button>
+                      </div>
+                  </div>
+                  <div class="plus-minus">
+                    <button type="button" class="btn btn-light" id="minusb3">-</button>
+                    <div class="tran-amount" style="text-align: center;" id="amountb3">0</div>
+                    <button type="button" class="btn btn-dark" id="plusb3">+</button>
+                  </div>
+                  <div class="half-sell-max">
+                    <div>
+                    <button type="button" id="halfb3" class="btn btn-success btn-rad"><span>Half</span></button>
+                    </div>
+                    <div>
+                      <button type="button" id="buy3" class="btn btn-success btn-rad"><span>Buy</span></button>
+                    </div>
+                    <div>
+                      <button type="button"id="maxb3" class="btn btn-success btn-rad"><span>Max</span></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="transaction-panel" id="sell-panel3">
+                <div class="v-overlay__content">
+                  <div class="layout" style="display: flex;">
+                    <div class="tran-product" style="flex: 1;">Nuka Cola Cherry - <span id="sell-price3">750</span> caps<p>Current Inventory: <span id="sellint3">0</span></p></div>
+                      <div class="flex xs2 offset-xs6 mb-2">
+                        <button type="button" class="x-close-btn" id="close-xs3">X</button>
+                      </div>
+                  </div>
+                  <div class="plus-minus">
+                    <button type="button" class="btn btn-light" id="minus3">-</button>
+                    <div class="tran-amount" style="text-align: center;" id="amount3">0</div>
+                    <button type="button" class="btn btn-dark" id="plus3">+</button>
+                  </div>
+
+                  <div class="half-sell-max">
+                    <div>
+                    <button type="button" id="halfs3" class="btn btn-success btn-rad"><span>Half</span></button>
+                    </div>
+                    <div>
+                      <button type="button" id="sell3" class="btn btn-success btn-rad" onclick="sellClickHandler(3)"><span>Sell</span></button>
+                    </div>
+                    <div>
+                      <button type="button" id="maxs3" class="btn btn-success btn-rad"><span >Max</span></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!-- end of item3 -->
+
+            <!-- Item 4 Nuka Cola -->
+            <div class="accordion-item trade-panel" id="item4">
+              <h2 class="accordion-header" id="flush-headingFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                  <div class="trade-panel-head" style="display:flex; flex-direction:column;">
+                    <div class="prod-price">
+                      <div style="flex:1;"><h3 id="item-name4">Nuka Cola</h3></div> <div><img src="images/caps-icon.png" class="blk-cap"> <h3 style="padding-right:8px;" id="item4value"> 500</h3></div>
+                    </div>
+                    <div class="in-av">
+                      <div style="flex:1;">Inventory: <span id="int4">0</span></div> <div style="padding-right:8px;">Amt Pd: <span id="amt-paid4">0</span></div>
+                    </div>
+                  </div>
+                </button>
+              </h2>
+              <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                  <button type="button" class="btn buy" id="buybtn4">Buy</button>
+                  <button type="button" class="btn sell" id="sellbtn4">Sell</button>
+                </div>
+              </div>
+
+              <div class="transaction-panel" id="buy-panel4">
+                <div class="v-overlay__content">
+                  <div class="layout" style="display: flex;">
+                    <div class="tran-product" style="flex: 1;">Nuka Cola - <span id="cur-price4">500</span> caps<p>Max available: <span id="maxavail4"></span></p></div>
+                      <div class="flex xs2 offset-xs6 mb-2">
+                        <button type="button" class="x-close-btn" id="close-x4">X</button>
+                      </div>
+                  </div>
+                  <div class="plus-minus">
+                    <button type="button" class="btn btn-light" id="minusb4">-</button>
+                    <div class="tran-amount" style="text-align: center;" id="amountb4">0</div>
+                    <button type="button" class="btn btn-dark" id="plusb4">+</button>
+                  </div>
+                  <div class="half-sell-max">
+                    <div>
+                    <button type="button" id="halfb4" class="btn btn-success btn-rad"><span>Half</span></button>
+                    </div>
+                    <div>
+                      <button type="button" id="buy4" class="btn btn-success btn-rad"><span>Buy</span></button>
+                    </div>
+                    <div>
+                      <button type="button"id="maxb4" class="btn btn-success btn-rad"><span>Max</span></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="transaction-panel" id="sell-panel4">
+                <div class="v-overlay__content">
+                  <div class="layout" style="display: flex;">
+                    <div class="tran-product" style="flex: 1;">Nuka Cola - <span id="sell-price4">500</span> caps<p>Current Inventory: <span id="sellint4">0</span></p></div>
+                      <div class="flex xs2 offset-xs6 mb-2">
+                        <button type="button" class="x-close-btn" id="close-xs4">X</button>
+                      </div>
+                  </div>
+                  <div class="plus-minus">
+                    <button type="button" class="btn btn-light" id="minus4">-</button>
+                    <div class="tran-amount" style="text-align: center;" id="amount4">0</div>
+                    <button type="button" class="btn btn-dark" id="plus4">+</button>
+                  </div>
+
+                  <div class="half-sell-max">
+                    <div>
+                    <button type="button" id="halfs4" class="btn btn-success btn-rad"><span>Half</span></button>
+                    </div>
+                    <div>
+                      <button type="button" id="sell4" class="btn btn-success btn-rad" onclick="sellClickHandler(4)"><span>Sell</span></button>
+                    </div>
+                    <div>
+                      <button type="button" id="maxs4" class="btn btn-success btn-rad"><span >Max</span></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!-- end of item4 -->
+
+            <!-- Item 5 Jet -->
+            <div class="accordion-item trade-panel" id="item5">
+              <h2 class="accordion-header" id="flush-headingFive">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+                  <div class="trade-panel-head" style="display:flex; flex-direction:column;">
+                    <div class="prod-price">
+                      <div style="flex:1;"><h3 id="item-name5">Jet</h3></div> <div><img src="images/caps-icon.png" class="blk-cap"> <h3 style="padding-right:8px;" id="item5value">400</h3></div>
+                    </div>
+                    <div class="in-av">
+                      <div style="flex:1;">Inventory: <span id="int5">0</span></div> <div style="padding-right:8px;">Amt Pd: <span id="amt-paid5">0</span></div>
+                    </div>
+                  </div>
+                </button>
+              </h2>
+              <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                  <button type="button" class="btn buy" id="buybtn5">Buy</button>
+                  <button type="button" class="btn sell" id="sellbtn5">Sell</button>
+                </div>
+              </div>
+
+              <div class="transaction-panel" id="buy-panel5">
+                <div class="v-overlay__content">
+                  <div class="layout" style="display: flex;">
+                    <div class="tran-product" style="flex: 1;">Jet - <span id="cur-price5">400</span> caps<p>Max available: <span id="maxavail5"></span></p></div>
+                      <div class="flex xs2 offset-xs6 mb-2">
+                        <button type="button" class="x-close-btn" id="close-x5">X</button>
+                      </div>
+                  </div>
+                  <div class="plus-minus">
+                    <button type="button" class="btn btn-light" id="minusb5">-</button>
+                    <div class="tran-amount" style="text-align: center;" id="amountb5">0</div>
+                    <button type="button" class="btn btn-dark" id="plusb5">+</button>
+                  </div>
+                  <div class="half-sell-max">
+                    <div>
+                    <button type="button" id="halfb5" class="btn btn-success btn-rad"><span>Half</span></button>
+                    </div>
+                    <div>
+                      <button type="button" id="buy5" class="btn btn-success btn-rad"><span>Buy</span></button>
+                    </div>
+                    <div>
+                      <button type="button"id="maxb5" class="btn btn-success btn-rad"><span>Max</span></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="transaction-panel" id="sell-panel5">
+                <div class="v-overlay__content">
+                  <div class="layout" style="display: flex;">
+                    <div class="tran-product" style="flex: 1;">Jet - <span id="sell-price5">400</span> caps<p>Current Inventory: <span id="sellint5">0</span></p></div>
+                      <div class="flex xs2 offset-xs6 mb-2">
+                        <button type="button" class="x-close-btn" id="close-xs5">X</button>
+                      </div>
+                  </div>
+                  <div class="plus-minus">
+                    <button type="button" class="btn btn-light" id="minus5">-</button>
+                    <div class="tran-amount" style="text-align: center;" id="amount5">0</div>
+                    <button type="button" class="btn btn-dark" id="plus5">+</button>
+                  </div>
+
+                  <div class="half-sell-max">
+                    <div>
+                    <button type="button" id="halfs5" class="btn btn-success btn-rad"><span>Half</span></button>
+                    </div>
+                    <div>
+                      <button type="button" id="sell5" class="btn btn-success btn-rad" onclick="sellClickHandler(5)"><span>Sell</span></button>
+                    </div>
+                    <div>
+                      <button type="button" id="maxs5" class="btn btn-success btn-rad"><span >Max</span></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!-- end of item5 -->
+
+            <!-- Item 6 Radaway -->
+            <div class="accordion-item trade-panel" id="item6">
+              <h2 class="accordion-header" id="flush-headingSix">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
+                  <div class="trade-panel-head" style="display:flex; flex-direction:column;">
+                    <div class="prod-price">
+                      <div style="flex:1;"><h3 id="item-name6">Radaway</h3></div> <div><img src="images/caps-icon.png" class="blk-cap"> <h3 style="padding-right:8px;" id="item6value">300</h3></div>
+                    </div>
+                    <div class="in-av">
+                      <div style="flex:1;">Inventory: <span id="int6">0</span></div> <div style="padding-right:8px;">Amt Pd: <span id="amt-paid6">0</span></div>
+                    </div>
+                  </div>
+                </button>
+              </h2>
+              <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                  <button type="button" class="btn buy" id="buybtn6">Buy</button>
+                  <button type="button" class="btn sell" id="sellbtn6">Sell</button>
+                </div>
+              </div>
+
+              <div class="transaction-panel" id="buy-panel6">
+                <div class="v-overlay__content">
+                  <div class="layout" style="display: flex;">
+                    <div class="tran-product" style="flex: 1;">Radaway - <span id="cur-price6">300</span> caps<p>Max available: <span id="maxavail6"></span></p></div>
+                      <div class="flex xs2 offset-xs6 mb-2">
+                        <button type="button" class="x-close-btn" id="close-x6">X</button>
+                      </div>
+                  </div>
+                  <div class="plus-minus">
+                    <button type="button" class="btn btn-light" id="minusb6">-</button>
+                    <div class="tran-amount" style="text-align: center;" id="amountb6">0</div>
+                    <button type="button" class="btn btn-dark" id="plusb6">+</button>
+                  </div>
+                  <div class="half-sell-max">
+                    <div>
+                    <button type="button" id="halfb6" class="btn btn-success btn-rad"><span>Half</span></button>
+                    </div>
+                    <div>
+                      <button type="button" id="buy6" class="btn btn-success btn-rad"><span>Buy</span></button>
+                    </div>
+                    <div>
+                      <button type="button"id="maxb6" class="btn btn-success btn-rad"><span>Max</span></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="transaction-panel" id="sell-panel6">
+                <div class="v-overlay__content">
+                  <div class="layout" style="display: flex;">
+                    <div class="tran-product" style="flex: 1;">Radaway - <span id="sell-price6">300</span> caps<p>Current Inventory: <span id="sellint6">0</span></p></div>
+                      <div class="flex xs2 offset-xs6 mb-2">
+                        <button type="button" class="x-close-btn" id="close-xs6">X</button>
+                      </div>
+                  </div>
+                  <div class="plus-minus">
+                    <button type="button" class="btn btn-light" id="minus6">-</button>
+                    <div class="tran-amount" style="text-align: center;" id="amount6">0</div>
+                    <button type="button" class="btn btn-dark" id="plus6">+</button>
+                  </div>
+
+                  <div class="half-sell-max">
+                    <div>
+                    <button type="button" id="halfs6" class="btn btn-success btn-rad"><span>Half</span></button>
+                    </div>
+                    <div>
+                      <button type="button" id="sell6" class="btn btn-success btn-rad" onclick="sellClickHandler(6)"><span>Sell</span></button>
+                    </div>
+                    <div>
+                      <button type="button" id="maxs6" class="btn btn-success btn-rad"><span >Max</span></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!-- end of item6 -->
+
+            <!-- Item 7 Stimpak -->
+            <div class="accordion-item trade-panel" id="item7">
+              <h2 class="accordion-header" id="flush-headingSeven">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSeven" aria-expanded="false" aria-controls="flush-collapseSeven">
+                  <div class="trade-panel-head" style="display:flex; flex-direction:column;">
+                    <div class="prod-price">
+                      <div style="flex:1;"><h3 id="item-name7">Stimpak</h3></div> <div><img src="images/caps-icon.png" class="blk-cap"> <h3 style="padding-right:8px;" id="item7value">200</h3></div>
+                    </div>
+                    <div class="in-av">
+                      <div style="flex:1;">Inventory: <span id="int7">0</span></div> <div style="padding-right:8px;">Amt Pd: <span id="amt-paid7">0</span></div>
+                    </div>
+                  </div>
+                </button>
+              </h2>
+              <div id="flush-collapseSeven" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                  <button type="button" class="btn buy" id="buybtn7">Buy</button>
+                  <button type="button" class="btn sell" id="sellbtn7">Sell</button>
+                </div>
+              </div>
+
+              <div class="transaction-panel" id="buy-panel7">
+                <div class="v-overlay__content">
+                  <div class="layout" style="display: flex;">
+                    <div class="tran-product" style="flex: 1;">Stimpak - <span id="cur-price7">200</span> caps<p>Max available: <span id="maxavail7"></span></p></div>
+                      <div class="flex xs2 offset-xs6 mb-2">
+                        <button type="button" class="x-close-btn" id="close-x7">X</button>
+                      </div>
+                  </div>
+                  <div class="plus-minus">
+                    <button type="button" class="btn btn-light" id="minusb7">-</button>
+                    <div class="tran-amount" style="text-align: center;" id="amountb7">0</div>
+                    <button type="button" class="btn btn-dark" id="plusb7">+</button>
+                  </div>
+                  <div class="half-sell-max">
+                    <div>
+                    <button type="button" id="halfb7" class="btn btn-success btn-rad"><span>Half</span></button>
+                    </div>
+                    <div>
+                      <button type="button" id="buy7" class="btn btn-success btn-rad"><span>Buy</span></button>
+                    </div>
+                    <div>
+                      <button type="button"id="maxb7" class="btn btn-success btn-rad"><span>Max</span></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="transaction-panel" id="sell-panel7">
+                <div class="v-overlay__content">
+                  <div class="layout" style="display: flex;">
+                    <div class="tran-product" style="flex: 1;">Stimpak - <span id="sell-price7">200</span> caps<p>Current Inventory: <span id="sellint7">0</span></p></div>
+                      <div class="flex xs2 offset-xs6 mb-2">
+                        <button type="button" class="x-close-btn" id="close-xs7">X</button>
+                      </div>
+                  </div>
+                  <div class="plus-minus">
+                    <button type="button" class="btn btn-light" id="minus7">-</button>
+                    <div class="tran-amount" style="text-align: center;" id="amount7">0</div>
+                    <button type="button" class="btn btn-dark" id="plus7">+</button>
+                  </div>
+
+                  <div class="half-sell-max">
+                    <div>
+                    <button type="button" id="halfs7" class="btn btn-success btn-rad"><span>Half</span></button>
+                    </div>
+                    <div>
+                      <button type="button" id="sell7" class="btn btn-success btn-rad" onclick="sellClickHandler(7)"><span>Sell</span></button>
+                    </div>
+                    <div>
+                      <button type="button" id="maxs7" class="btn btn-success btn-rad"><span >Max</span></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!-- end of item7 -->
+
+            <!-- Item 8 Rad-X -->
+            <div class="accordion-item trade-panel" id="item8">
+              <h2 class="accordion-header" id="flush-headingEight">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseEight" aria-expanded="false" aria-controls="flush-collapseEight">
+                  <div class="trade-panel-head" style="display:flex; flex-direction:column;">
+                    <div class="prod-price">
+                      <div style="flex:1;"><h3 id="item-name8">Rad-X</h3></div> <div><img src="images/caps-icon.png" class="blk-cap"> <h3 style="padding-right:8px;" id="item8value">200</h3></div>
+                    </div>
+                    <div class="in-av">
+                      <div style="flex:1;">Inventory: <span id="int8">0</span></div> <div style="padding-right:8px;">Amt Pd: <span id="amt-paid8">0</span></div>
+                    </div>
+                  </div>
+                </button>
+              </h2>
+              <div id="flush-collapseEight" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                  <button type="button" class="btn buy" id="buybtn8">Buy</button>
+                  <button type="button" class="btn sell" id="sellbtn8">Sell</button>
+                </div>
+              </div>
+
+              <div class="transaction-panel" id="buy-panel8">
+                <div class="v-overlay__content">
+                  <div class="layout" style="display: flex;">
+                    <div class="tran-product" style="flex: 1;">Rad-X - <span id="cur-price8">200</span> caps<p>Max available: <span id="maxavail8"></span></p></div>
+                      <div class="flex xs2 offset-xs6 mb-2">
+                        <button type="button" class="x-close-btn" id="close-x8">X</button>
+                      </div>
+                  </div>
+                  <div class="plus-minus">
+                    <button type="button" class="btn btn-light" id="minusb8">-</button>
+                    <div class="tran-amount" style="text-align: center;" id="amountb8">0</div>
+                    <button type="button" class="btn btn-dark" id="plusb8">+</button>
+                  </div>
+                  <div class="half-sell-max">
+                    <div>
+                    <button type="button" id="halfb8" class="btn btn-success btn-rad"><span>Half</span></button>
+                    </div>
+                    <div>
+                      <button type="button" id="buy8" class="btn btn-success btn-rad"><span>Buy</span></button>
+                    </div>
+                    <div>
+                      <button type="button"id="maxb8" class="btn btn-success btn-rad"><span>Max</span></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="transaction-panel" id="sell-panel8">
+                <div class="v-overlay__content">
+                  <div class="layout" style="display: flex;">
+                    <div class="tran-product" style="flex: 1;">Rad-X - <span id="sell-price8">200</span> caps<p>Current Inventory: <span id="sellint8">0</span></p></div>
+                      <div class="flex xs2 offset-xs6 mb-2">
+                        <button type="button" class="x-close-btn" id="close-xs8">X</button>
+                      </div>
+                  </div>
+                  <div class="plus-minus">
+                    <button type="button" class="btn btn-light" id="minus8">-</button>
+                    <div class="tran-amount" style="text-align: center;" id="amount8">0</div>
+                    <button type="button" class="btn btn-dark" id="plus8">+</button>
+                  </div>
+
+                  <div class="half-sell-max">
+                    <div>
+                    <button type="button" id="halfs8" class="btn btn-success btn-rad"><span>Half</span></button>
+                    </div>
+                    <div>
+                      <button type="button" id="sell8" class="btn btn-success btn-rad" onclick="sellClickHandler(8)"><span>Sell</span></button>
+                    </div>
+                    <div>
+                      <button type="button" id="maxs8" class="btn btn-success btn-rad"><span >Max</span></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!-- end of item8 -->
+
+            <!-- Item 9 Psycho -->
+            <div class="accordion-item trade-panel" id="item9">
+              <h2 class="accordion-header" id="flush-headingNine">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseNine" aria-expanded="false" aria-controls="flush-collapseNine">
+                  <div class="trade-panel-head" style="display:flex; flex-direction:column;">
+                    <div class="prod-price">
+                      <div style="flex:1;"><h3 id="item-name9">Psycho</h3></div> <div><img src="images/caps-icon.png" class="blk-cap"> <h3 style="padding-right:8px;" id="item9value">100</h3></div>
+                    </div>
+                    <div class="in-av">
+                      <div style="flex:1;">Inventory: <span id="int9">0</span></div> <div style="padding-right:8px;">Amt Pd: <span id="amt-paid9">0</span></div>
+                    </div>
+                  </div>
+                </button>
+              </h2>
+              <div id="flush-collapseNine" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                  <button type="button" class="btn buy" id="buybtn9">Buy</button>
+                  <button type="button" class="btn sell" id="sellbtn9">Sell</button>
+                </div>
+              </div>
+
+              <div class="transaction-panel" id="buy-panel9">
+                <div class="v-overlay__content">
+                  <div class="layout" style="display: flex;">
+                    <div class="tran-product" style="flex: 1;">Psycho - <span id="cur-price9">100</span> caps<p>Max available: <span id="maxavail9"></span></p></div>
+                      <div class="flex xs2 offset-xs6 mb-2">
+                        <button type="button" class="x-close-btn" id="close-x9">X</button>
+                      </div>
+                  </div>
+                  <div class="plus-minus">
+                    <button type="button" class="btn btn-light" id="minusb9">-</button>
+                    <div class="tran-amount" style="text-align: center;" id="amountb9">0</div>
+                    <button type="button" class="btn btn-dark" id="plusb9">+</button>
+                  </div>
+                  <div class="half-sell-max">
+                    <div>
+                    <button type="button" id="halfb9" class="btn btn-success btn-rad"><span>Half</span></button>
+                    </div>
+                    <div>
+                      <button type="button" id="buy9" class="btn btn-success btn-rad"><span>Buy</span></button>
+                    </div>
+                    <div>
+                      <button type="button"id="maxb9" class="btn btn-success btn-rad"><span>Max</span></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="transaction-panel" id="sell-panel9">
+                <div class="v-overlay__content">
+                  <div class="layout" style="display: flex;">
+                    <div class="tran-product" style="flex: 1;">Psycho - <span id="sell-price9">100</span> caps<p>Current Inventory: <span id="sellint9">0</span></p></div>
+                      <div class="flex xs2 offset-xs6 mb-2">
+                        <button type="button" class="x-close-btn" id="close-xs9">X</button>
+                      </div>
+                  </div>
+                  <div class="plus-minus">
+                    <button type="button" class="btn btn-light" id="minus9">-</button>
+                    <div class="tran-amount" style="text-align: center;" id="amount9">0</div>
+                    <button type="button" class="btn btn-dark" id="plus9">+</button>
+                  </div>
+
+                  <div class="half-sell-max">
+                    <div>
+                    <button type="button" id="halfs9" class="btn btn-success btn-rad"><span>Half</span></button>
+                    </div>
+                    <div>
+                      <button type="button" id="sell9" class="btn btn-success btn-rad" onclick="sellClickHandler(9)"><span>Sell</span></button>
+                    </div>
+                    <div>
+                      <button type="button" id="maxs9" class="btn btn-success btn-rad"><span >Max</span></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!-- end of item9 -->
+
+            <!-- Item 10 Purified Water -->
+            <div class="accordion-item trade-panel" id="item10">
+              <h2 class="accordion-header" id="flush-headingTen">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTen" aria-expanded="false" aria-controls="flush-collapseTen">
+                  <div class="trade-panel-head" style="display:flex; flex-direction:column;">
+                    <div class="prod-price">
+                      <div style="flex:1;"><h3 id="item-name10">Purified Water</h3></div> <div><img src="images/caps-icon.png" class="blk-cap"> <h3 style="padding-right:8px;" id="item10value">25</h3></div>
+                    </div>
+                    <div class="in-av">
+                      <div style="flex:1;">Inventory: <span id="int10">0</span></div> <div style="padding-right:8px;">Amt Pd: <span id="amt-paid10">0</span></div>
+                    </div>
+                  </div>
+                </button>
+              </h2>
+              <div id="flush-collapseTen" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                  <button type="button" class="btn buy" id="buybtn10">Buy</button>
+                  <button type="button" class="btn sell" id="sellbtn10">Sell</button>
+                </div>
+              </div>
+
+              <div class="transaction-panel" id="buy-panel10">
+                <div class="v-overlay__content">
+                  <div class="layout" style="display: flex;">
+                    <div class="tran-product" style="flex: 1;">Purified Water - <span id="cur-price10">25</span> caps<p>Max available: <span id="maxavail10"></span></p></div>
+                      <div class="flex xs2 offset-xs6 mb-2">
+                        <button type="button" class="x-close-btn" id="close-x10">X</button>
+                      </div>
+                  </div>
+                  <div class="plus-minus">
+                    <button type="button" class="btn btn-light" id="minusb10">-</button>
+                    <div class="tran-amount" style="text-align: center;" id="amountb10">0</div>
+                    <button type="button" class="btn btn-dark" id="plusb10">+</button>
+                  </div>
+                  <div class="half-sell-max">
+                    <div>
+                    <button type="button" id="halfb10" class="btn btn-success btn-rad"><span>Half</span></button>
+                    </div>
+                    <div>
+                      <button type="button" id="buy10" class="btn btn-success btn-rad"><span>Buy</span></button>
+                    </div>
+                    <div>
+                      <button type="button"id="maxb10" class="btn btn-success btn-rad"><span>Max</span></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="transaction-panel" id="sell-panel10">
+                <div class="v-overlay__content">
+                  <div class="layout" style="display: flex;">
+                    <div class="tran-product" style="flex: 1;">Purified Water - <span id="sell-price10">25</span> caps<p>Current Inventory: <span id="sellint10">0</span></p></div>
+                      <div class="flex xs2 offset-xs6 mb-2">
+                        <button type="button" class="x-close-btn" id="close-xs10">X</button>
+                      </div>
+                  </div>
+                  <div class="plus-minus">
+                    <button type="button" class="btn btn-light" id="minus10">-</button>
+                    <div class="tran-amount" style="text-align: center;" id="amount10">0</div>
+                    <button type="button" class="btn btn-dark" id="plus10">+</button>
+                  </div>
+
+                  <div class="half-sell-max">
+                    <div>
+                    <button type="button" id="halfs10" class="btn btn-success btn-rad"><span>Half</span></button>
+                    </div>
+                    <div>
+                      <button type="button" id="sell10" class="btn btn-success btn-rad" onclick="sellClickHandler(10)"><span>Sell</span></button>
+                    </div>
+                    <div>
+                      <button type="button" id="maxs10" class="btn btn-success btn-rad"><span >Max</span></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!-- end of item10 -->
+
+
+          </div> <!-- end of accordion -->
+
+          <!-- end of dummy data-->
+        </div>
+
+        <div class="footer">
+          <div class="healthbar">
+            <div class="progress-txt">HP</div>
+            <div class="progress">
+              <div class="progress-bar health" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 100%" id="health-bar">
+                <span class="sr-only">health</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    </div>
+    <script src="script.js"></script> <!-- Link to your JavaScript file -->
+</body>
+</html>
